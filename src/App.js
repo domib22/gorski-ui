@@ -4,6 +4,7 @@ import Start from './components/Start';
 import Login from './components/Login';
 import Reg from './components/Registration';
 import Account from './components/UserAccount.js';
+import Users from './components/Users';
 
 class App extends Component {
     render() {
@@ -14,6 +15,7 @@ class App extends Component {
                 <Route path="/logowanie" component={Login} />
                 <Route path="/rejestracja" component={Reg} />
                 <Route path="/moje_konto" component={Account} />
+                <Route path="/admin/uzytkownicy" component={Users} />
               </Switch>
             </Router>
         );
