@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 
 import AuthService from '../services/AuthService';
+import NavBar from './NavBar';
 
 class Registration extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class Registration extends Component {
     render() {
         return (
           <div>
+            <NavBar/>
             <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450 }}>
                   <Header as='h2' color='teal' textAlign='center'>

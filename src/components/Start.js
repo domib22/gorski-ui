@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import { Jumbotron, Button } from 'reactstrap';
 
+import NavBar from './NavBar';
+
 class Start extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +16,7 @@ class Start extends Component {
     render() {
         return (
             <div>
+              <NavBar/>
               <Jumbotron>
                 <h1 className="display-3">Dobierz sprzęt górski</h1>
                 <p className="lead">Nie masz pojęcia co powinieneś zabrać ze sobą w góry, a kolejne przeczytane fora i blogi tylko mieszają Ci w głowie?</p>

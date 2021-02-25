@@ -5,6 +5,7 @@ import '../styles/Users.css';
 
 import AuthService from '../services/AuthService';
 import BackService from '../services/BackService';
+import NavBar from './NavBar';
 
 class Users extends Component {
     constructor(props) {
@@ -75,6 +76,7 @@ class Users extends Component {
 
         return (
             <div>
+                <NavBar/>
                 <ReactTable data={this.state.users} columns={columns} filterable={true}/>
             </div>
         );

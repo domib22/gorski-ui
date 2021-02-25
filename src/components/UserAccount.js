@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import { Alert } from "react-bootstrap";
 
+import NavBar from './NavBar';
 import AuthService from '../services/AuthService';
 
 class UserAccount extends Component {
@@ -48,6 +49,7 @@ class UserAccount extends Component {
 
     return (
       <div>
+        <NavBar/>
         <Container fluid>
         {userInfo}
         </Container>
