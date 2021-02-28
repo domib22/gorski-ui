@@ -6,14 +6,19 @@ import '../styles/Users.css';
 import AuthService from '../services/AuthService';
 import BackService from '../services/BackService';
 import NavBar from './NavBar';
+import AddUser from './AddUser';
 
 class Users extends Component {
     constructor(props) {
         super(props);
-        this.state={ users: [], error: ""}
+        this.state={ users: [], error: "" }
     }
 
     componentDidMount() {
+        this.fetchUsers();
+    }
+
+    fetchUsers = () => {
         BackService.getUsers()
             .then( response => {
               this.setState({
@@ -39,6 +44,27 @@ class Users extends Component {
         );
     }
 
+    onDelClick = (id) => {
+        BackService.deleteUser(id)
+            .then(response => {
+              if (response.status === 200) {
+              console.log("User delete successfully");}
+              this.fetchUsers();
+            }, error => {
+              console.log(error);
+              this.setState({
+                error: error.toString()
+              });
+            });
+    }
+
+    addUser = (username, password, userGender) => {
+        AuthService.register(username, password, userGender)
+            .then(response => {
+                this.fetchUsers();}
+            );
+    }
+
     render()
     {
         const columns = [{
@@ -46,29 +72,29 @@ class Users extends Component {
                accessor: 'userName',
                Cell: this.editable
            }, {
-               Header: 'Płeć',
-               accessor: 'userGender',
-               Cell: this.editable
-           }, {
                Header: 'Hasło',
                accessor: 'password',
                Cell: this.editable
            }, {
+               Header: 'Płeć',
+               accessor: 'userGender',
+               Cell: this.editable
+           }, {
                sortable: false,
                filterable: false,
-               width: 100,
+               width: 150,
                Cell: row => (
                    <div>
-                       <button id="button_del">Usuń</button>
+                       <button id="button_del" onClick={() => this.onDelClick(row.original.id)}>Usuń użytkownika</button>
                    </div>
                )
            }, {
                sortable: false,
                filterable: false,
-               width: 100,
+               width: 130,
                Cell: row => (
                    <div>
-                       <button>Zapisz</button>
+                       <button>Zapisz zmianę</button>
                    </div>
                )
            }
@@ -77,6 +103,7 @@ class Users extends Component {
         return (
             <div>
                 <NavBar/>
+                <AddUser addUser={this.addUser}/>
                 <ReactTable data={this.state.users} columns={columns} filterable={true}/>
             </div>
         );

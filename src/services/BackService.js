@@ -12,9 +12,15 @@ axios.interceptors.request.use( config => {
 });
 
 class BackService {
+  // users:
   async getUsers() {
     return await axios.get("http://localhost:8081/app/users");
   }
+  async deleteUser(id) {
+    return await axios.delete("http://localhost:8081/app/users/" + id);
+  }
+
+  // products:
   async getProducts() {
       return await axios.get("http://localhost:8081/app/products");
   }

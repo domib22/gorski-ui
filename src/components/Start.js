@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import { Jumbotron, Button } from 'reactstrap';
 
 import NavBar from './NavBar';
 
 class Start extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
     }
