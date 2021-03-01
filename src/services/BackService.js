@@ -24,6 +24,13 @@ class BackService {
   async getProducts() {
       return await axios.get("http://localhost:8081/app/products");
   }
+  async deleteProduct(id) {
+      return await axios.delete("http://localhost:8081/app/products/" + id);
+  }
+  async addProduct(name, price, productGender, season, category, pictureName, link) {
+      return await axios.post("http://localhost:8081/app/products", { name, price, productGender, season, category, pictureName, link });
+  }
+
 }
 
 export default new BackService();

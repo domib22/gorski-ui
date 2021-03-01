@@ -54,6 +54,7 @@ class NavBar extends Component {
               <Nav className="mr-auto">
                 {this.state.showUser && <NavLink href="/">Dobierz sprzęt</NavLink>}
                 {this.state.showAdmin && <NavLink href="/admin/uzytkownicy">Użytkownicy</NavLink>}
+                {this.state.showAdmin && <NavLink href="/admin/produkty">Produkty</NavLink>}
               </Nav>
               <NavbarToggler onClick={this.toggle}/>
               <Collapse isOpen={this.state.isOpen} navbar>
@@ -66,7 +67,7 @@ class NavBar extends Component {
                           </NavbarText>
                       </NavItem>
                       <NavItem>
-                        <NavLink href="#" onClick={this.doLogout}>SignOut</NavLink>
+                        <NavLink href="#" onClick={this.doLogout}>Wyloguj się</NavLink>
                       </NavItem>
                     </Nav>
                   ) : (

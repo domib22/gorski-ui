@@ -11,7 +11,7 @@ import AddUser from './AddUser';
 class Users extends Component {
     constructor(props) {
         super(props);
-        this.state={ users: [], error: "" }
+        this.state={ users: [] }
     }
 
     componentDidMount() {
@@ -26,9 +26,6 @@ class Users extends Component {
               })
             }, error => {
               console.log(error);
-              this.setState({
-                error: error.toString()
-              });
             });
     }
 
@@ -45,17 +42,16 @@ class Users extends Component {
     }
 
     onDelClick = (id) => {
-        BackService.deleteUser(id)
-            .then(response => {
-              if (response.status === 200) {
-              console.log("User delete successfully");}
-              this.fetchUsers();
-            }, error => {
-              console.log(error);
-              this.setState({
-                error: error.toString()
-              });
-            });
+        if (window.confirm('Na pewno chcesz usunąć tego użytkownika?')) {
+            BackService.deleteUser(id)
+                .then(response => {
+                  if (response.status === 200) {
+                  console.log("User delete successfully");}
+                  this.fetchUsers();
+                }, error => {
+                  console.log(error);
+                });
+        }
     }
 
     addUser = (username, password, userGender) => {
@@ -103,7 +99,9 @@ class Users extends Component {
         return (
             <div>
                 <NavBar/>
-                <AddUser addUser={this.addUser}/>
+                <div className="contener">
+                    <AddUser addUser={this.addUser}/>
+                </div>
                 <ReactTable data={this.state.users} columns={columns} filterable={true}/>
             </div>
         );

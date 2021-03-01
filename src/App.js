@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Reg from './components/Registration';
 import Account from './components/UserAccount.js';
 import Users from './components/Users';
+import Products from './components/Products';
 
 class App extends Component {
     render() {
@@ -16,6 +17,7 @@ class App extends Component {
                 <Route path="/rejestracja" component={Reg} />
                 <Route path="/moje_konto" component={Account} />
                 <Route path="/admin/uzytkownicy" component={Users} />
+                <Route path="/admin/produkty" component={Products} />
               </Switch>
             </Router>
         );
