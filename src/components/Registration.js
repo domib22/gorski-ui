@@ -53,8 +53,10 @@ class Registration extends Component {
                    success: true
                });
                }, error => {
-                   if (error.response.status === 400) {
+                   if (error.response.status === 422) {
                        mess = "Użytkownik z takim loginem już istnieje!";
+                   } else if (error.response.status === 400) {
+                       mess = "Brak wymaganych danych! Sprawdź czy wszystkie pola są wypełnione."
                    } else {
                        mess = "Niepoprawne dane :/";
                    }
@@ -135,14 +137,13 @@ class Registration extends Component {
                       <Button color='teal' fluid size='large' type='submit' name='submit' onClick={this.doRegister}>
                         Zarejestruj się
                       </Button>
-                        {
-                          !this.state.valid && (
-                            <Alert key="valid" color="danger">
-                              Coś poszło nie tak :/ Sprawdź wszystkie pola jeszcze raz!
-                            </Alert>
-                          )
-                        }
-                        {alert}
+                      {
+                        !this.state.valid ? (
+                          <Alert key="valid" color="danger">
+                            Coś poszło nie tak :/ Sprawdź wszystkie pola jeszcze raz!
+                          </Alert>
+                        ) : (alert)
+                      }
                     </Segment>
                   </Form>
                   <Message>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container } from 'reactstrap';
-import { Alert } from "react-bootstrap";
+import { Button, Container, Alert } from 'reactstrap';
 
 import NavBar from './NavBar';
 import AuthService from '../services/AuthService';
@@ -33,16 +32,16 @@ class UserAccount extends Component {
 
       userInfo = (
                 <div style={{marginTop:"20px"}}>
-                  <Alert variant="info">
+                  <Alert color="info">
                     <h2>Witaj {user.username}!</h2>
                   </Alert>
                 </div>
               );
-    } else { // not login
+    } else { // not logged in
       userInfo = <div style={{marginTop:"20px"}}>
-                    <Alert variant="primary">
-                      <h2>Profile Component</h2>
-                      <Button color="success"><Link to="/logowanie"><span style={{color:"white"}}>Logowanie</span></Link></Button>
+                    <Alert color="primary">
+                      <h2>Nie jesteś zalogowanym użytkownikiem</h2>
+                      <Link to="/logowanie"><Button color="success"><span style={{color:"white"}}>Logowanie</span></Button></Link>
                     </Alert>
                   </div>
     }
