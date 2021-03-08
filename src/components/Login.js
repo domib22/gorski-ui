@@ -24,7 +24,6 @@ class Login extends Component {
                   this.props.history.push('/moje_konto');
                 },
                 error => {
-                  console.log("Login fail: error = { " + error.toString() + " }");
                   this.setState({error: "Niepoprawne hasło lub nazwa użytkownika!"});
                 }
             );
