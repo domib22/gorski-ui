@@ -1,5 +1,5 @@
-# gorski ui (in progress...) 
-React ui for the "gorski-rest-service".
+# Gorski UI (in progress...) 
+React ui for the [gorski-rest-service](https://github.com/domib22/gorski-rest-service).
 The project is created to learning the basics of **React, JS, axios, JWT and REST**.
 
 ##### User-side validation:
@@ -10,7 +10,7 @@ The project is created to learning the basics of **React, JS, axios, JWT and RES
 ![admin_panel_products](./public/products_add.png)
 ![admin_panel_users](./public/users_del.png)
 
-## SETUP
+## SETUP (with npm)
 First start the [gorski-rest-service](https://github.com/domib22/gorski-rest-service).
 
 * npm ci
