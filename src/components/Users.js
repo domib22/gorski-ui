@@ -11,11 +11,14 @@ import AddUser from './AddUser';
 class Users extends Component {
     constructor(props) {
         super(props);
-        this.state={ users: [] }
+        this.state={ users: [] , user: undefined }
     }
 
     componentDidMount() {
         this.fetchUsers();
+
+        const user = AuthService.getCurrentUser();
+        this.setState({user: user});
     }
 
     fetchUsers = () => {
@@ -41,8 +44,10 @@ class Users extends Component {
         );
     }
 
-    onDelClick = (id) => {
-        if (window.confirm('Na pewno chcesz usunąć tego użytkownika?')) {
+    onDelClick = (id, userName) => {
+        if (this.state.user.username === userName) {
+            window.alert('Nie możesz usunąć tego konta');
+        } else if (window.confirm('Na pewno chcesz usunąć tego użytkownika?')) {
             BackService.deleteUser(id)
                 .then(response => {
                   if (response.status === 200) {
@@ -53,6 +58,18 @@ class Users extends Component {
                 });
         }
     }
+
+    updateUserData(username, gender, id) {
+            BackService.editUser(username, gender, id)
+                .then(response => {
+                     if (response.status === 200) {
+                     console.log("successfully");}
+                     this.fetchUsers();
+                   }, error => {
+                     console.log(error);
+                   });
+    }
+
 
     addUser = (username, password, userGender) => {
         AuthService.register(username, password, userGender)
@@ -69,8 +86,7 @@ class Users extends Component {
                Cell: this.editable
            }, {
                Header: 'Hasło',
-               accessor: 'password',
-               Cell: this.editable
+               accessor: 'password'
            }, {
                Header: 'Płeć',
                accessor: 'userGender',
@@ -81,7 +97,7 @@ class Users extends Component {
                width: 150,
                Cell: row => (
                    <div>
-                       <button id="button_del" onClick={() => this.onDelClick(row.original.id)}>Usuń użytkownika</button>
+                       <button id="button_del" onClick={() => this.onDelClick(row.original.id, row.original.userName)}>Usuń użytkownika</button>
                    </div>
                )
            }, {
@@ -90,7 +106,7 @@ class Users extends Component {
                width: 130,
                Cell: row => (
                    <div>
-                       <button>Zapisz zmianę</button>
+                       <button onClick={() => this.updateUserData(row.original.userName, row.original.userGender, row.original.id)}>Zapisz zmianę</button>
                    </div>
                )
            }

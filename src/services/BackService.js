@@ -19,6 +19,9 @@ class BackService {
   async deleteUser(id) {
     return await axios.delete("http://localhost:8081/app/users/" + id);
   }
+  async editUser(username, userGender, id) {
+    return await axios.put("http://localhost:8081/app/users/" + id, { id, username, userGender });
+  }
 
   // products:
   async getProducts() {
