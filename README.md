@@ -1,3 +1,23 @@
+# gorski ui (in progress...) 
+React ui for the "gorski-rest-service".
+The project is created to learning the basics of **React, JS, axios, JWT and REST**.
+
+##### User-side validation:
+![application screenshot](./public/login_valid.png)
+![application screenshot](./public/registration_valid.png)
+![user_account](./public/account.png)
+##### Admin panel:
+![admin_panel_products](./public/products_add.png)
+![admin_panel_users](./public/users_del.png)
+
+## SETUP
+First start the [gorski-rest-service](https://github.com/domib22/gorski-rest-service).
+
+* npm ci
+* npm start
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -23,7 +43,6 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
