@@ -18,8 +18,10 @@ class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {username: '', password: '', gender: 'MAN', valid: true, success: false,
-                      error: {username: '', password: ''}, message: ''};
+                      error: {username: '', password: ''}, message: '', checked: true};
     }
+
+    toggle = () => { this.setState({checked: !this.state.checked}); }
 
     handleChange = (event) => {
         const { name, value } = event.target;
@@ -43,30 +45,39 @@ class Registration extends Component {
         event.preventDefault();
         const validate = validateForm(this.state.error);
         this.setState( {valid: validate} );
-        if(validate) {
-          var mess = '';
-          AuthService.register(this.state.username, this.state.password, this.state.gender)
-           .then( response => {
-               mess = "Utworzono konto! Możesz się zalogować :)";
-               this.setState({
-                   message: mess,
-                   success: true
-               });
-               }, error => {
-                   if (error.response.status === 422) {
-                       mess = "Użytkownik z takim loginem już istnieje!";
-                   } else if (error.response.status === 400) {
-                       mess = "Brak wymaganych danych! Sprawdź czy wszystkie pola są wypełnione."
-                   } else {
-                       mess = "Niepoprawne dane :/";
-                   }
-                   console.log(error.toString());
+
+        if (this.state.checked === true) { // agree the terms
+            if (validate) {
+              var mess = '';
+              AuthService.register(this.state.username, this.state.password, this.state.gender)
+               .then( response => {
+                   mess = "Utworzono konto! Możesz się zalogować :)";
                    this.setState({
-                       success: false,
-                       message: mess
+                       message: mess,
+                       success: true
                    });
-               }
-           )
+                   }, error => {
+                       if (error.response.status === 422) {
+                           mess = "Użytkownik z takim loginem już istnieje!";
+                       } else if (error.response.status === 400) {
+                           mess = "Brak wymaganych danych! Sprawdź czy wszystkie pola są wypełnione."
+                       } else {
+                           mess = "Niepoprawne dane :/";
+                       }
+                       console.log(error.toString());
+                       this.setState({
+                           success: false,
+                           message: mess
+                       });
+                   }
+               )
+            }
+        } else {    // not agree the terms
+            console.log("Error: Non-acceptance of the regulations");
+            this.setState({
+                success: false,
+                message: "Zaakceptuj regulamin!"
+            });
         }
 
     };
@@ -133,6 +144,7 @@ class Registration extends Component {
                             <option value="WOMAN">Kobieta</option>
                         </select>
                      </div>
+                     <Form.Checkbox label='Akceptuję regulamin.' checked={this.state.checked} onClick={this.toggle} />
 
                       <Button color='teal' fluid size='large' type='submit' name='submit' onClick={this.doRegister}>
                         Zarejestruj się

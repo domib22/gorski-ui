@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Alert } from 'reactstrap';
+import { Alert, Button } from 'reactstrap';
+import { Grid, Menu, Message, Header, Divider, Image, Form, Segment } from 'semantic-ui-react';
 
+import Cos from "../images/cos.png";
 import NavBar from './NavBar';
 import AuthService from '../services/AuthService';
 
@@ -9,7 +11,7 @@ class UserAccount extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {user: undefined};
+    this.state = {user: undefined, showProfile: true, showEdition: false, showOpinion: false, showPassword: false};
   }
 
   componentDidMount() {
@@ -17,26 +19,91 @@ class UserAccount extends Component {
     this.setState({user: user});
   }
 
+  toggleProfile = () => {
+    this.setState({showProfile: true, showEdition: false, showOpinion: false, showPassword: false});
+  }
+  toggleEdition = () => {
+    this.setState({showProfile: false, showEdition: true, showOpinion: false, showPassword: false});
+  }
+  togglePassword = () => {
+      this.setState({showProfile: false, showEdition: false, showOpinion: false, showPassword: true});
+  }
+  toggleOpinion = () => {
+    this.setState({showProfile: false, showEdition: false, showOpinion: true, showPassword: false});
+  }
+
   render() {
     let userInfo = "";
+    let profileBlock = "";
+    let editBlock = "";
+    let opinionBlock = "";
+    let passwordBlock = "";
+
     const user = this.state.user;
 
     // login
     if (user && user.token) {
 
-      let roles = "";
-
-      user.authorities.forEach(authority => {
-        roles = roles + " " + authority.authority
-      });
-
       userInfo = (
-                <div style={{marginTop:"20px"}}>
-                  <Alert color="info">
-                    <h2>Witaj {user.username}!</h2>
-                  </Alert>
-                </div>
-              );
+            <Menu vertical>
+              <Menu.Item onClick={this.toggleProfile}>Twój profil</Menu.Item>
+              <Menu.Item onClick={this.toggleEdition}>Edytuj swoje dane</Menu.Item>
+              <Menu.Item onClick={this.togglePassword}>Zmień hasło</Menu.Item>
+              <Menu.Item onClick={this.toggleOpinion}>Twoje opinie</Menu.Item>
+            </Menu>
+      );
+      profileBlock = (
+            <Message>
+                <Header as='h1'>Witaj {user.username}</Header>
+                <Divider />
+                <Image src={Cos} avatar size="tiny"/><br/>
+                <Button color="link">Zmień zdjęcie</Button>
+            </Message>
+      );
+      editBlock = (
+            <Message>
+                <Header as='h1'>Edycja danych</Header>
+                <Divider />
+                <Form size='large'>
+                   <Segment>
+                        <div className="form-group">
+                            <select name="gender" className="form-control">
+                                <option value="MAN">Mężczyzna</option>
+                                <option value="WOMAN">Kobieta</option>
+                            </select>
+                        </div>
+                     <Button color="primary">Zapisz dane</Button>
+                   </Segment>
+                </Form>
+            </Message>
+      );
+      passwordBlock = (
+            <Message>
+                <Header as='h1'>Zmiana hasła</Header>
+                <Divider />
+                <Form size='large'>
+                   <Segment>
+                     <Form.Input icon='lock' iconPosition='left'
+                       placeholder='Obecne hasło'
+                       type='password'
+                       name='password'
+                     />
+                     <Form.Input icon='lock' iconPosition='left'
+                       placeholder='Nowe hasło'
+                       type='password'
+                       name='password'
+                     />
+                     <Button color="primary">Zmień hasło</Button>
+                   </Segment>
+                </Form>
+            </Message>
+      );
+      opinionBlock = (
+            <Message>
+                <Header as='h1'>Twoje opinie</Header>
+                <Divider />
+            </Message>
+      );
     } else { // not logged in
       userInfo = <div style={{marginTop:"20px"}}>
                     <Alert color="primary">
@@ -49,9 +116,13 @@ class UserAccount extends Component {
     return (
       <div>
         <NavBar/>
-        <Container fluid>
-        {userInfo}
-        </Container>
+        <Grid container columns={2} stackable style={{ padding: '3em' }}>
+            <Grid.Column width={4} >{userInfo}</Grid.Column>
+            {this.state.showProfile && <Grid.Column width={12}>{profileBlock}</Grid.Column>}
+            {this.state.showEdition && <Grid.Column width={12}>{editBlock}</Grid.Column>}
+            {this.state.showPassword && <Grid.Column width={12}>{passwordBlock}</Grid.Column>}
+            {this.state.showOpinion && <Grid.Column width={12}>{opinionBlock}</Grid.Column>}
+        </Grid>
       </div>
     );
   }
