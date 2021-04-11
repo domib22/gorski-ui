@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Image } from 'semantic-ui-react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavbarText, NavItem, NavLink } from 'reactstrap';
 
+import logo from '../images/logo.png';
 import AuthService from '../services/AuthService';
 
 class NavBar extends Component {
@@ -15,25 +17,25 @@ class NavBar extends Component {
          showAdmin: false,
          username: undefined,
          login: false
-    };
-  }
+        };
+    }
 
-  componentDidMount() {
-      const user = AuthService.getCurrentUser();
+    componentDidMount() {
+        const user = AuthService.getCurrentUser();
 
-      if (user) {
-        const roles = [];
-        user.authorities.forEach(authority => {
-          roles.push(authority.authority)
-        });
+        if (user) {
+          const roles = [];
+          user.authorities.forEach(authority => {
+            roles.push(authority.authority)
+          });
 
-        this.setState({
-          login: true,
-          username: user.username,
-          showUser: roles.includes("ROLE_USER"),
-          showAdmin: roles.includes("ROLE_ADMIN")
-        });
-      }
+          this.setState({
+            login: true,
+            username: user.username,
+            showUser: roles.includes("ROLE_USER"),
+            showAdmin: roles.includes("ROLE_ADMIN")
+          });
+        }
     }
 
     toggle() {
@@ -49,12 +51,15 @@ class NavBar extends Component {
       }
 
     render() {
-        return <Navbar color="dark" dark expand="md">
-              <NavbarBrand>Górski</NavbarBrand>
+        const styleNav = {color: 'rgb(230, 230, 230)', textDecoration: 'none'};
+
+        return (
+            <Navbar color="dark" dark expand="md">
+              <Image src={logo} size="tiny"/><NavbarBrand>Górski</NavbarBrand>
               <Nav className="mr-auto">
-                {this.state.showUser && <NavLink href="/">Dobierz sprzęt</NavLink>}
-                {this.state.showAdmin && <NavLink href="/admin/uzytkownicy">Użytkownicy</NavLink>}
-                {this.state.showAdmin && <NavLink href="/admin/produkty">Produkty</NavLink>}
+                {this.state.showUser && <NavLink style={styleNav} href="/">Dobierz sprzęt </NavLink>}
+                {this.state.showAdmin && <NavLink style={styleNav} href="/admin/uzytkownicy">Użytkownicy</NavLink>}
+                {this.state.showAdmin && <NavLink style={styleNav} href="/admin/produkty">Produkty</NavLink>}
               </Nav>
               <NavbarToggler onClick={this.toggle}/>
               <Collapse isOpen={this.state.isOpen} navbar>
@@ -62,9 +67,7 @@ class NavBar extends Component {
                   this.state.login ? (
                     <Nav className="ml-auto" navbar>
                       <NavItem>
-                          <NavbarText>
-                            <a href="/moje_konto">{this.state.username}</a>
-                          </NavbarText>
+                        <NavLink href="/moje_konto" style={styleNav}>{this.state.username}</NavLink>
                       </NavItem>
                       <NavItem>
                         <NavLink href="#" onClick={this.doLogout}>Wyloguj się</NavLink>
@@ -82,8 +85,9 @@ class NavBar extends Component {
                   )
                 }
               </Collapse>
-            </Navbar>;
-          }
+            </Navbar>
+            )
+    }
 }
 
 export default withRouter(NavBar);
