@@ -4,6 +4,7 @@ import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
 import AuthService from '../services/AuthService';
 import NavBar from './NavBar';
+import Footer from './Footer';
 
 const validateForm = (error) => {
   let validate = true;
@@ -103,67 +104,68 @@ class Registration extends Component {
         }
 
         return (
-          <div>
-            <NavBar/>
-            <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle'>
-                <Grid.Column style={{ maxWidth: 450 }}>
-                  <Header as='h2' color='teal' textAlign='center'>
-                    Rejestracja
-                  </Header>
-                  <Form size='large'>
-                    <Segment stacked>
-                      <Form.Input fluid icon='user' iconPosition='left'
-                        placeholder='Login'
-                        type='text'
-                        name='username'
-                        onChange={this.handleChange}
-                      />
-                      {
-                        error.username && (
-                            <Alert color="danger">
-                                {error.username}
-                            </Alert>
-                        )
-                      }
-                      <Form.Input fluid icon='lock' iconPosition='left'
-                        placeholder='Hasło'
-                        type='password'
-                        name='password'
-                        onChange={this.handleChange}
-                      />
-                      {
-                        error.password && (
-                            <Alert color="danger">
-                                {error.password}
-                            </Alert>
-                        )
-                      }
-                     <div className="form-group">
-                        <select name="gender" onChange={this.handleChange} className="form-control">
-                            <option value="MAN">Mężczyzna</option>
-                            <option value="WOMAN">Kobieta</option>
-                        </select>
-                     </div>
-                     <Form.Checkbox label='Akceptuję regulamin.' checked={this.state.checked} onClick={this.toggle} />
+            <div>
+              <NavBar/>
+              <Grid container textAlign='center' style={{padding: '3em', minHeight: '100vh'}}>
+                  <Grid.Column style={{ maxWidth: 450 }}>
+                    <Header as='h2' color='teal' textAlign='center'>
+                      Rejestracja
+                    </Header>
+                    <Form size='large'>
+                      <Segment stacked>
+                        <Form.Input fluid icon='user' iconPosition='left'
+                          placeholder='Login'
+                          type='text'
+                          name='username'
+                          onChange={this.handleChange}
+                        />
+                        {
+                          error.username && (
+                              <Alert color="danger">
+                                  {error.username}
+                              </Alert>
+                          )
+                        }
+                        <Form.Input fluid icon='lock' iconPosition='left'
+                          placeholder='Hasło'
+                          type='password'
+                          name='password'
+                          onChange={this.handleChange}
+                        />
+                        {
+                          error.password && (
+                              <Alert color="danger">
+                                  {error.password}
+                              </Alert>
+                          )
+                        }
+                       <div className="form-group">
+                          <select name="gender" onChange={this.handleChange} className="form-control">
+                              <option value="MAN">Mężczyzna</option>
+                              <option value="WOMAN">Kobieta</option>
+                          </select>
+                       </div>
+                       <Form.Checkbox required label='Akceptuję regulamin.' checked={this.state.checked} onClick={this.toggle} />
 
-                      <Button color='teal' fluid size='large' type='submit' name='submit' onClick={this.doRegister}>
-                        Zarejestruj się
-                      </Button>
-                      {
-                        !this.state.valid ? (
-                          <Alert key="valid" color="danger">
-                            Coś poszło nie tak :/ Sprawdź wszystkie pola jeszcze raz!
-                          </Alert>
-                        ) : (alert)
-                      }
-                    </Segment>
-                  </Form>
-                  <Message>
-                    Masz już konto? <a href='/logowanie'>Zaloguj się</a>
-                  </Message>
-                </Grid.Column>
-            </Grid>
-          </div>
+                        <Button color='teal' fluid size='large' type='submit' name='submit' onClick={this.doRegister}>
+                          Zarejestruj się
+                        </Button>
+                        {
+                          !this.state.valid ? (
+                            <Alert key="valid" color="danger">
+                              Coś poszło nie tak :/ Sprawdź wszystkie pola jeszcze raz!
+                            </Alert>
+                          ) : (alert)
+                        }
+                      </Segment>
+                    </Form>
+                    <Message>
+                      Masz już konto? <a href='/logowanie'>Zaloguj się</a>
+                    </Message>
+                  </Grid.Column>
+              </Grid>
+              <Footer/>
+            </div>
         );
     }
 }
