@@ -66,7 +66,7 @@ class UserAccount extends Component {
                 <Header as='h1'>Edycja danych</Header>
                 <Divider />
                 <Form size='large'>
-                   <Segment>
+                   <Segment style={{maxWidth: 300, marginBottom: 10}}>
                         <div className="form-group">
                             <select name="gender" className="form-control">
                                 <option value="MAN">Mężczyzna</option>
@@ -83,7 +83,7 @@ class UserAccount extends Component {
                 <Header as='h1'>Zmiana hasła</Header>
                 <Divider />
                 <Form size='large'>
-                   <Segment>
+                   <Segment style={{maxWidth: 300, marginBottom: 10}}>
                      <Form.Input icon='lock' iconPosition='left'
                        placeholder='Obecne hasło'
                        type='password'
@@ -118,7 +118,7 @@ class UserAccount extends Component {
       <div>
         <NavBar/>
         <Grid container columns={2} stackable style={{ padding: '3em', minHeight:  '100vh'}}>
-            <Grid.Column width={4} >{userInfo}</Grid.Column>
+            <Grid.Column width={4}> {userInfo} </Grid.Column>
             {this.state.showProfile && <Grid.Column width={12}>{profileBlock}</Grid.Column>}
             {this.state.showEdition && <Grid.Column width={12}>{editBlock}</Grid.Column>}
             {this.state.showPassword && <Grid.Column width={12}>{passwordBlock}</Grid.Column>}

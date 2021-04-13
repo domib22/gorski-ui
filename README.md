@@ -2,13 +2,17 @@
 React ui for the [gorski-rest-service](https://github.com/domib22/gorski-rest-service).
 The project is created to learning the basics of **React, JS, axios, JWT and REST**.
 
+![application screenshot](./public/start.png)
+
+![user_account](./public/account.png)
 ##### User-side validation:
 ![application screenshot](./public/login_valid.png)
+
 ![application screenshot](./public/registration_valid.png)
-![user_account](./public/account.png)
 ##### Admin panel:
-![admin_panel_products](./public/products_add.png)
-![admin_panel_users](./public/users_del.png)
+![admin_panel_products](./public/products.png)
+
+![admin_panel_users](./public/user_add.png)
 
 ## SETUP (with npm)
 First start the [gorski-rest-service](https://github.com/domib22/gorski-rest-service).
