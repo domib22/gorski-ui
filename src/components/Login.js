@@ -3,8 +3,6 @@ import { Alert } from 'reactstrap';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 
 import AuthService from '../services/AuthService';
-import NavBar from './NavBar';
-import Footer from './Footer';
 
 class Login extends Component {
     constructor(props) {
@@ -33,7 +31,6 @@ class Login extends Component {
     render() {
         return (
             <div>
-              <NavBar/>
               <Grid container textAlign='center' style={{padding: '3em', minHeight: '100vh'}}>
                   <Grid.Column style={{ maxWidth: 450 }}>
                     <Header as='h2' color='blue' textAlign='center'>
@@ -71,7 +68,6 @@ class Login extends Component {
                     </Message>
                   </Grid.Column>
               </Grid>
-              <Footer/>
             </div>
         );
     }

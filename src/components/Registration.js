@@ -3,8 +3,6 @@ import { Alert } from 'reactstrap';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 
 import AuthService from '../services/AuthService';
-import NavBar from './NavBar';
-import Footer from './Footer';
 
 const validateForm = (error) => {
   let validate = true;
@@ -105,7 +103,6 @@ class Registration extends Component {
 
         return (
             <div>
-              <NavBar/>
               <Grid container textAlign='center' style={{padding: '3em', minHeight: '100vh'}}>
                   <Grid.Column style={{ maxWidth: 450 }}>
                     <Header as='h2' color='teal' textAlign='center'>
@@ -164,7 +161,6 @@ class Registration extends Component {
                     </Message>
                   </Grid.Column>
               </Grid>
-              <Footer/>
             </div>
         );
     }

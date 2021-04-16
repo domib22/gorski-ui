@@ -4,8 +4,6 @@ import { Jumbotron } from 'reactstrap';
 
 import mount from '../images/mountains1.jpg';
 import AuthService from '../services/AuthService';
-import NavBar from './NavBar';
-import Footer from './Footer';
 
 class Start extends Component {
 
@@ -24,7 +22,6 @@ class Start extends Component {
 
         return (
             <div>
-                <NavBar/>
                 <div style={{minHeight: '100vh'}}>
                     <Jumbotron style={{width: '100%', margin: 0}}>
                       <h1 className="display-3">Dobierz sprzęt górski</h1>
@@ -60,7 +57,6 @@ class Start extends Component {
                       <img src={mount} alt="Mountain landscape" width="100%"/>
                     </div>
                 </div>
-                <Footer/>
             </div>
         )
     }
