@@ -7,14 +7,12 @@ import Reg from './components/Registration';
 import Account from './components/UserAccount.js';
 import Users from './components/Users';
 import Products from './components/Products';
-import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 
 class App extends Component {
     render() {
         return (
             <Router>
-              <NavBar />
               <Switch> (JSK attribute) path: "/"
                 <Route exact path="/" component={Start} />
                 <Route path="/logowanie" component={Login} />

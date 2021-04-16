@@ -5,6 +5,7 @@ import '../styles/Users.css';
 
 import AuthService from '../services/AuthService';
 import BackService from '../services/BackService';
+import NavBar from './NavBar';
 import AddUser from './AddUser';
 
 class Users extends Component {
@@ -113,6 +114,7 @@ class Users extends Component {
 
         return (
             <div>
+                <NavBar/>
                 <div className="contener">
                     <AddUser addUser={this.addUser}/>
                 </div>

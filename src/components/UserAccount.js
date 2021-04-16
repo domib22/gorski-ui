@@ -5,6 +5,7 @@ import { Grid, Menu, Message, Header, Divider, Image, Form, Segment } from 'sema
 
 import Cos from "../images/cos.png";
 import AuthService from '../services/AuthService';
+import NavBar from './NavBar';
 
 class UserAccount extends Component {
 
@@ -114,6 +115,7 @@ class UserAccount extends Component {
 
     return (
       <div>
+        <NavBar/>
         <Grid container columns={2} stackable style={{ padding: '3em', minHeight:  '100vh'}}>
             <Grid.Column width={4}> {userInfo} </Grid.Column>
             {this.state.showProfile && <Grid.Column width={12}>{profileBlock}</Grid.Column>}

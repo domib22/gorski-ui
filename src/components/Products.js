@@ -4,6 +4,7 @@ import 'react-table-6/react-table.css';
 import '../styles/Users.css';
 
 import BackService from '../services/BackService';
+import NavBar from './NavBar';
 import AddProduct from './AddProduct';
 
 class Products extends Component {
@@ -113,6 +114,7 @@ class Products extends Component {
 
         return (
             <div>
+                <NavBar/>
                 <div className="contener">
                     <AddProduct addProduct={this.onAddClick}/>
                 </div>
