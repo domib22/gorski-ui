@@ -54,8 +54,8 @@ class Products extends Component {
         }
     }
 
-    onAddClick = (name, price, productGender, season, category, pictureName, link) => {
-        BackService.addProduct(name, price, productGender, season, category, pictureName, link)
+    onAddClick = (name, price, productGender, season, category, pictureName, link, description) => {
+        BackService.addProduct(name, price, productGender, season, category, pictureName, link, description)
             .then(response => {
                 if (response.status === 200) {
                     console.log("Product add successfully");}

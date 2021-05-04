@@ -32,7 +32,6 @@ class NavBar extends Component {
           this.setState({
             login: true,
             username: user.username,
-            showUser: roles.includes("ROLE_USER"),
             showAdmin: roles.includes("ROLE_ADMIN")
           });
         }
@@ -57,7 +56,7 @@ class NavBar extends Component {
             <Navbar color="dark" dark expand="md">
               <Image src={logo} size="tiny"/><NavbarBrand>Górski</NavbarBrand>
               <Nav className="mr-auto">
-                {this.state.showUser && <NavLink style={styleNav} href="/">Dobierz sprzęt </NavLink>}
+                <NavLink style={styleNav} href="/">Dobierz sprzęt </NavLink>
                 {this.state.showAdmin && <NavLink style={styleNav} href="/admin/uzytkownicy">Użytkownicy</NavLink>}
                 {this.state.showAdmin && <NavLink style={styleNav} href="/admin/produkty">Produkty</NavLink>}
               </Nav>

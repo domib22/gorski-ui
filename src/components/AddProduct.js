@@ -5,7 +5,7 @@ import { Form, Segment } from 'semantic-ui-react';
 class AddUser extends Component {
     constructor(props) {
         super(props);
-        this.state = { modal: false, name: '', price: '0', productGender: 'UNISEX', season: 'YEAR_ROUND', category: 'JACKETS', pictureName: '', link: '' };
+        this.state = { modal: false, name: '', price: '0', productGender: 'UNISEX', season: 'YEAR_ROUND', category: 'JACKETS', pictureName: '', link: '', description: ''};
     }
 
     handleChange = (event) => {
@@ -16,7 +16,7 @@ class AddUser extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.addProduct(this.state.name, this.state.price, this.state.productGender, this.state.season, this.state.category, this.state.pictureName, this.state.link);
+        this.props.addProduct(this.state.name, this.state.price, this.state.productGender, this.state.season, this.state.category, this.state.pictureName, this.state.link, this.state.description);
         this.toggle(this.state.toggle);
     }
 
@@ -82,6 +82,12 @@ class AddUser extends Component {
                             placeholder='Link do produktu'
                             type='text'
                             name='link'
+                            onChange={this.handleChange}
+                          />
+                          <Form.Input
+                            placeholder='Opis produktu'
+                            type='text'
+                            name='description'
                             onChange={this.handleChange}
                           />
                         </Segment>

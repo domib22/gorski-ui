@@ -32,27 +32,14 @@ class Start extends Component {
                       <p>Nie martw się! Pomożemy dobrać niezbędną odzież oraz wyposażenie!</p>
                       <br/>
                       <p className="lead">
-                          {
-                              (user && user.token) ? (   // logged in
-                              <a href='/dobor_sprzetu'>
-                                <Button animated color="blue">
-                                  <Button.Content visible> Rozpocznij </Button.Content>
-                                  <Button.Content hidden>
-                                      <Icon name='arrow right' />
-                                  </Button.Content>
-                                </Button>
-                              </a>
-                              ) : (   // not logged in
-                              <a href='/logowanie'>
-                                <Button animated color="blue">
-                                  <Button.Content visible> Rozpocznij </Button.Content>
-                                  <Button.Content hidden>
-                                      <Icon name='arrow right' />
-                                  </Button.Content>
-                                </Button>
-                              </a>
-                              )
-                          }
+                        <a href='/dobor_sprzetu'>
+                          <Button animated color="blue">
+                            <Button.Content visible> Rozpocznij </Button.Content>
+                            <Button.Content hidden>
+                                <Icon name='arrow right' />
+                            </Button.Content>
+                          </Button>
+                        </a>
                       </p>
                     </Jumbotron>
                     <div>
