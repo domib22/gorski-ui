@@ -31,7 +31,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{background: '#fdfdff'}}>
               <NavBar/>
               <Grid container textAlign='center' style={{padding: '3em', minHeight: '100vh'}}>
                   <Grid.Column style={{ maxWidth: 450 }}>

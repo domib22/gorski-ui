@@ -103,7 +103,7 @@ class Registration extends Component {
         }
 
         return (
-            <div>
+            <div style={{background: '#fdfffd'}}>
               <NavBar/>
               <Grid container textAlign='center' style={{padding: '3em', minHeight: '100vh'}}>
                   <Grid.Column style={{ maxWidth: 450 }}>

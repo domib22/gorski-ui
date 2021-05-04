@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Alert, Button } from 'reactstrap';
-import { Grid, Menu, Message, Header, Divider, Image, Form, Segment } from 'semantic-ui-react';
+import { Grid, Menu, Message, Header, Divider, Image, Form, Segment, Rating } from 'semantic-ui-react';
 
 import Cos from "../images/cos.png";
+import BackService from '../services/BackService';
 import AuthService from '../services/AuthService';
 import NavBar from './NavBar';
 
@@ -11,25 +12,27 @@ class UserAccount extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {user: undefined, showProfile: true, showEdition: false, showOpinion: false, showPassword: false};
+    this.state = {activeBlock: 'profile', user: undefined, userReviews: []};
   }
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
     this.setState({user: user});
+
+    this.fetchReviews();
   }
 
-  toggleProfile = () => {
-    this.setState({showProfile: true, showEdition: false, showOpinion: false, showPassword: false});
-  }
-  toggleEdition = () => {
-    this.setState({showProfile: false, showEdition: true, showOpinion: false, showPassword: false});
-  }
-  togglePassword = () => {
-      this.setState({showProfile: false, showEdition: false, showOpinion: false, showPassword: true});
-  }
-  toggleOpinion = () => {
-    this.setState({showProfile: false, showEdition: false, showOpinion: true, showPassword: false});
+  handleClick = (e, { name }) => this.setState({ activeBlock: name })
+
+  fetchReviews = () => {
+    BackService.getUserReviews('Mike')
+        .then( response => {
+              this.setState({
+                userReviews: response.data
+              })
+            }, error => {
+              console.log(error);
+            });
   }
 
   render() {
@@ -40,16 +43,20 @@ class UserAccount extends Component {
     let passwordBlock = "";
 
     const user = this.state.user;
-
+    const { activeBlock } = this.state;
     // login
     if (user && user.token) {
 
       userInfo = (
             <Menu vertical>
-              <Menu.Item onClick={this.toggleProfile}>Twój profil</Menu.Item>
-              <Menu.Item onClick={this.toggleEdition}>Edytuj swoje dane</Menu.Item>
-              <Menu.Item onClick={this.togglePassword}>Zmień hasło</Menu.Item>
-              <Menu.Item onClick={this.toggleOpinion}>Twoje opinie</Menu.Item>
+              <Menu.Item name='profile' active={activeBlock === 'profile'} color={'blue'}
+                onClick={this.handleClick}>Twój profil</Menu.Item>
+              <Menu.Item name='edit' active={activeBlock === 'edit'} color={'violet'}
+                onClick={this.handleClick}>Edytuj swoje dane</Menu.Item>
+              <Menu.Item name='password' active={activeBlock === 'password'} color={'pink'}
+                onClick={this.handleClick}>Zmień hasło</Menu.Item>
+              <Menu.Item name='opinion' active={activeBlock === 'opinion'} color={'green'}
+                onClick={this.handleClick}>Twoje opinie</Menu.Item>
             </Menu>
       );
       profileBlock = (
@@ -102,6 +109,15 @@ class UserAccount extends Component {
             <Message>
                 <Header as='h1'>Twoje opinie</Header>
                 <Divider />
+                {
+                    this.state.userReviews.map(review =>(
+                    <div key={review.id}>
+                       <Rating maxRating={5} defaultRating={review.starsAmount} size={'large'} disabled />
+                       <p>{review.opinion}</p>
+                       <Divider />
+                    </div>
+                    ))
+                }
             </Message>
       );
     } else { // not logged in
@@ -114,14 +130,14 @@ class UserAccount extends Component {
     }
 
     return (
-      <div>
+      <div style={{background: '#fdfffd'}}>
         <NavBar/>
         <Grid container columns={2} stackable style={{ padding: '3em', minHeight:  '100vh'}}>
             <Grid.Column width={4}> {userInfo} </Grid.Column>
-            {this.state.showProfile && <Grid.Column width={12}>{profileBlock}</Grid.Column>}
-            {this.state.showEdition && <Grid.Column width={12}>{editBlock}</Grid.Column>}
-            {this.state.showPassword && <Grid.Column width={12}>{passwordBlock}</Grid.Column>}
-            {this.state.showOpinion && <Grid.Column width={12}>{opinionBlock}</Grid.Column>}
+            {this.state.activeBlock === 'profile' && <Grid.Column width={12}>{profileBlock}</Grid.Column>}
+            {this.state.activeBlock === 'edit' && <Grid.Column width={12}>{editBlock}</Grid.Column>}
+            {this.state.activeBlock === 'password' && <Grid.Column width={12}>{passwordBlock}</Grid.Column>}
+            {this.state.activeBlock === 'opinion' && <Grid.Column width={12}>{opinionBlock}</Grid.Column>}
         </Grid>
       </div>
     );
