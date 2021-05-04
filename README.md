@@ -1,8 +1,15 @@
 # Gorski UI (in progress...) 
 React ui for the [gorski-rest-service](https://github.com/domib22/gorski-rest-service).
+Mountain equipment selection system based on user preferences.
+
 The project is created to learning the basics of **React, JS, axios, JWT and REST**.
 
 ![application screenshot](./public/start.png)
+
+![application screenshot](./public/selection.png)
+
+![application screenshot](./public/result.png)
+![application screenshot](./public/result_reviews.png)
 
 ![user_account](./public/account.png)
 ##### User-side validation:
