@@ -8,10 +8,13 @@ The project is created to learning the basics of **React, JS, axios, JWT and RES
 
 ![application screenshot](./public/selection.png)
 
-![application screenshot](./public/result.png)
+![application screenshot](./public/example_result.png)
+
 ![application screenshot](./public/result_reviews.png)
 
 ![user_account](./public/account.png)
+
+![user_account](./public/user_products.png)
 ##### User-side validation:
 ![application screenshot](./public/login_valid.png)
 
