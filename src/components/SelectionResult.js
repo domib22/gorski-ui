@@ -77,6 +77,20 @@ class SelectionResult extends Component {
                 });
     }
 
+    addOwnedProduct = (e, { id }) => {
+        BackService.addOwnedProduct(this.state.user.username, id)
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("Product add successfully to owned products");}
+                    alert("Produkt został dodany do Twojego wyposażenia");
+                }, error => {
+                    if (error.response.status === 422) {
+                        alert("Masz już ten produkt w swoim wyposażeniu!");
+                    }
+                    console.log(error);
+                });
+    }
+
     render() {
         return (
             <div style={{padding: 30, minHeight: '100vh', background: '#efeaff'}}>
@@ -190,6 +204,10 @@ class SelectionResult extends Component {
                                 this.state.products.filter(product0 => product0.category==='JACKETS').map(product =>(
                                     <div key={product.id}>
                                         <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
@@ -214,6 +232,10 @@ class SelectionResult extends Component {
                               this.state.products.filter(product0 => product0.category==='PANTS').map(product =>(
                                   <div key={product.id}>
                                       <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
@@ -238,6 +260,10 @@ class SelectionResult extends Component {
                                 this.state.products.filter(product0 => product0.category==='FLEECES_SWEATSHIRTS').map(product =>(
                                 <div key={product.id}>
                                     <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
@@ -286,6 +312,10 @@ class SelectionResult extends Component {
                                 this.state.products.filter(product0 => product0.category==='SHOES').map(product =>(
                                 <div key={product.id}>
                                     <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
@@ -310,6 +340,10 @@ class SelectionResult extends Component {
                                 this.state.products.filter(product0 => product0.category==='SOCKS').map(product =>(
                                 <div key={product.id}>
                                     <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
@@ -334,6 +368,10 @@ class SelectionResult extends Component {
                                 this.state.products.filter(product0 => product0.category==='HATS').map(product =>(
                                 <div key={product.id}>
                                     <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
@@ -382,6 +420,10 @@ class SelectionResult extends Component {
                                 this.state.products.filter(product0 => product0.category==='GLOVES').map(product =>(
                                 <div key={product.id}>
                                     <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
@@ -406,6 +448,10 @@ class SelectionResult extends Component {
                                 this.state.products.filter(product0 => product0.category==='SLEEPING_BAGS').map(product =>(
                                 <div key={product.id}>
                                     <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
@@ -430,6 +476,10 @@ class SelectionResult extends Component {
                                 this.state.products.filter(product0 => product0.category==='TENTS').map(product =>(
                                 <div key={product.id}>
                                     <Card style={{maxWidth: "320px", height: "100%", position: "relative"}}>
+                                            <Menu.Item id={product.id} onClick={this.addOwnedProduct} >
+                                                <Button style={{width: "100%", background:"green", borderRadius: 0, borderColor: "green"}}>
+                                                Dodaj do swojego sprzętu
+                                            </Button></Menu.Item>
                                             <CardBody>
                                                 <CardTitle tag="h5" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">~{product.price}zł</CardSubtitle>
