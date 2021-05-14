@@ -62,16 +62,16 @@ class UserAccount extends Component {
             });
   }
 
-  fetchReviews = (id) => {
-          BackService.getReviews(id)
-              .then( response => {
-                    this.setState({
-                      reviews: response.data
-                    })
-                  }, error => {
-                    console.log(error);
-                  });
-      }
+    fetchReviews = (id) => {
+        BackService.getReviews(id)
+            .then( response => {
+                  this.setState({
+                    reviews: response.data
+                  })
+                }, error => {
+                  console.log(error);
+                });
+    }
 
   fetchOwnedProducts = (username) => {
       BackService.getOwnedProducts(username)
@@ -82,7 +82,20 @@ class UserAccount extends Component {
               }, error => {
                 console.log(error);
               });
+  }
+
+  deleteOwnedProduct = (e, {id}) => {
+    if(window.confirm('Na pewno chcesz usunąć te produkt z wyposażenia?')) {
+        BackService.deleteOwnedProduct(this.state.user.username, id)
+            .then(response => {
+                  if (response.status === 200) {
+                  console.log("Product delete successfully");}
+                  this.fetchOwnedProducts(this.state.user.username);
+                }, error => {
+                  console.log(error);
+                });
     }
+  }
 
   render() {
     let userInfo = "";
@@ -181,6 +194,10 @@ class UserAccount extends Component {
                     this.state.ownedProducts.map(product =>(
                         <div key={product.id} style={{marginBottom: 5}}>
                             <Card style={{width: "240px", height: "100%", position: "relative"}}>
+                                <Menu.Item id={product.id} onClick={this.deleteOwnedProduct} >
+                                    <Button style={{width: "100%", background:"white", color:"orange", borderRadius: 0, borderColor: "orange"}}>
+                                    Usuń produkt
+                                </Button></Menu.Item>
                                 <CardBody>
                                     <CardTitle tag="h6" style={{fontWeight: "bold"}}>{product.name}</CardTitle>
                                 </CardBody>

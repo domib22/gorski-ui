@@ -28,6 +28,9 @@ class BackService {
     async addOwnedProduct(username, idProduct) {
         return await axios.put("http://localhost:8081/app/users?username="+username+"&idProduct="+idProduct);
     }
+    async deleteOwnedProduct(username, idProduct) {
+        return await axios.delete("http://localhost:8081/app/users?username="+username+"&idProduct="+idProduct);
+    }
 
     //products:
     async getProducts(criteria) {
