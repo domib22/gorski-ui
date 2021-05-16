@@ -46,7 +46,10 @@ class UserAccount extends Component {
     const id = this.state.activeId;
 
     BackService.addReview(id, this.state.stars, this.state.opinion, this.state.user.username)
-        .then(response => {this.fetchReviews(id);})
+        .then(response => {
+            this.fetchReviews(id);
+            this.fetchUserReviews(this.state.user.username);
+        })
   }
 
   isModal = () => this.setState({ modal: !this.state.modal });
@@ -62,16 +65,16 @@ class UserAccount extends Component {
             });
   }
 
-    fetchReviews = (id) => {
-        BackService.getReviews(id)
-            .then( response => {
-                  this.setState({
-                    reviews: response.data
-                  })
-                }, error => {
-                  console.log(error);
-                });
-    }
+  fetchReviews = (id) => {
+      BackService.getReviews(id)
+          .then( response => {
+                this.setState({
+                  reviews: response.data
+                })
+              }, error => {
+                console.log(error);
+              });
+  }
 
   fetchOwnedProducts = (username) => {
       BackService.getOwnedProducts(username)

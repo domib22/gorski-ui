@@ -19,7 +19,7 @@ class SelectionResult extends Component {
 
         const gender = this.props.gender;
         const season = this.props.season;
-        const criteria = `productGender:${gender},season:${season}`;
+        const criteria = `productGender:${gender},season:${season},productGender:unisex,season:year_round`;
         this.fetchResult(criteria);
     }
 
